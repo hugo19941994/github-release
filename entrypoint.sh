@@ -225,7 +225,7 @@ for asset in "$assets"/*; do
 	fi
 
 	# docs ref: https://developer.github.com/v3/repos/releases/#upload-a-release-asset
-	status_code="$(curl -sS  -X POST \
+	status_code="$(curl -v -sS  -X POST \
 		--write-out "%{http_code}" -o "$TMP/$file_name.json" \
 		-H "Authorization: token $TOKEN" \
 		-H "Content-Length: $(stat -c %s "$asset")" \
@@ -252,7 +252,7 @@ echo "::group::Complete Release"
 
 # Publish Release
 #   docs ref: https://developer.github.com/v3/repos/releases/#edit-a-release
-status_code="$(curl -sS  -X PATCH  -d '{"draft": false}' \
+status_code="$(curl -v -sS  -X PATCH  -d '{"draft": false}' \
 	--write-out "%{http_code}" -o "$TMP/publish.json" \
 	-H "Authorization: token $TOKEN" \
 	-H "Content-Type: application/json" \
