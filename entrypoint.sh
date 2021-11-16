@@ -228,7 +228,6 @@ for asset in "$assets"/*; do
 	status_code="$(curl -v -sS  -X POST \
 		--write-out "%{http_code}" -o "$TMP/$file_name.json" \
 		-H "Authorization: token $TOKEN" \
-		-H "Content-Length: $(stat -c %s "$asset")" \
 		-H "Content-Type: $(file -b --mime-type "$asset")" \
 		--upload-file "$asset" \
 		"$upload_url/$release_id/assets?name=$file_name")"
